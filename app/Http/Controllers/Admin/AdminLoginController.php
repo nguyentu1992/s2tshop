@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 // khai báo sử dụng loginRequest
 use App\Http\Requests\LoginRequest;
 use Auth;
-use App\User;
+use App\Models\Users;
 class AdminLoginController extends Controller
 {
 
@@ -50,6 +50,25 @@ class AdminLoginController extends Controller
         Auth::logout();
 //        return view('admin.login');
         return redirect()->route('getLogin');
+    }
+
+    public function postRegister(Request $request) {
+//        $username = $request['username'];
+//        $email = $request['email'];
+//        $password = bcrypt($request['password']);
+        $username = "Director Tu";
+        $email = "nguyentu.cnpm@gmail.com";
+        $password = bcrypt("MrTu1992");
+
+        $user = new Users();
+        $user->email = $email;
+        $user->username = $username;
+        $user->password = $password;
+
+        $user->save();
+        return "Register done!";
+
+//        return redirect()->route('login');
     }
 
 }
