@@ -1,0 +1,1 @@
+@extends('admin::passwords.email')
