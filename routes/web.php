@@ -27,12 +27,16 @@ Auth::routes();
 
 Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);
 Route::post('admincp/login', ['as' => 'postLogin', 'uses' => 'Admin\AdminLoginController@postLogin']);
-Route::post('admincp/register', ['as' => 'postRegister', 'uses' => 'Admin\AdminLoginController@postRegister']);
+Route::get('admincp/register', ['as' => 'postRegister', 'uses' => 'Admin\AdminLoginController@getRegister']);
 Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginController@getLogout']);
 
 Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespace' => 'Admin'], function() {
     Route::get('/', function() {
         return view('admin.home');
     });
+    Route::resource('category', 'AdminCategoryController');
+    Route::resource('product', 'AdminProductController');
+    Route::post('uploadImg', 'UploadImagesController@postImages');
 });
+
 

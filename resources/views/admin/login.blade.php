@@ -59,7 +59,7 @@
                 <li class="text-danger"> {{ session('status') }}</li>
             </ul>
         @endif
-        <form action="{{ route('getLogin') }}" method="post">
+        <form action="{{ route('postLogin') }}" method="post">
             {{ csrf_field() }}
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="txtEmail" placeholder="Email">

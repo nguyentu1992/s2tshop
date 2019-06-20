@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// khai báo sử dụng loginRequest
 use App\Http\Requests\LoginRequest;
 use Auth;
 use App\Models\Users;
+use Carbon\Carbon;
 class AdminLoginController extends Controller
 {
 
@@ -15,7 +15,7 @@ class AdminLoginController extends Controller
     {
         if (Auth::check()) {
             // nếu đăng nhập thàng công thì
-            return view('admin.dashboard');
+            return view('admin.home');
         } else {
             return view('admin.login');
         }
@@ -52,7 +52,7 @@ class AdminLoginController extends Controller
         return redirect()->route('getLogin');
     }
 
-    public function postRegister(Request $request) {
+    public function getRegister(Request $request) {
 //        $username = $request['username'];
 //        $email = $request['email'];
 //        $password = bcrypt($request['password']);
@@ -62,7 +62,7 @@ class AdminLoginController extends Controller
 
         $user = new Users();
         $user->email = $email;
-        $user->username = $username;
+        $user->name = $username;
         $user->password = $password;
 
         $user->save();
