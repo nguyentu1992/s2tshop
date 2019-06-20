@@ -85,7 +85,7 @@
                     <span>Save and back</span>
                 </button>
             </div>
-            <input id="image_id" type="hidden" name="image_id" value="{{ isset($image_id) ? $image_id[0] : '' }}">
+            <input id="image_id" type="hidden" name="image_id" value="{{ isset($image_id) ? $image_id : '' }}">
         </form>
 
     </section>
@@ -95,49 +95,51 @@
     <link rel="stylesheet" href="{{ asset('admin/dist/css/dropzone.css') }}">
     <script src="{{ asset('admin/dist/js/dropzone.js') }}"></script>
     <script type="text/javascript">
-        Dropzone.options.myDropzone= {
-            url: '{{ url('admincp/uploadImg') }}',
-            headers: {
-                'X-CSRF-TOKEN': '{!! csrf_token() !!}'
-            },
-            autoProcessQueue: true,
-            uploadMultiple: true,
-            parallelUploads: 5,
-            maxFiles: 10,
-            maxFilesize: 5,
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            dictFileTooBig: 'Image is bigger than 5MB',
-            addRemoveLinks: true,
-            removedfile: function(file) {
-                var name = file.name;
-                name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ url('admincp/deleteImg') }}',
-                    headers: {
-                        'X-CSRF-TOKEN': '{!! csrf_token() !!}'
-                    },
-                    data: "id="+name,
-                    dataType: 'html',
-                    success: function(data) {
-                        $("#msg").html(data);
+{{--        làm thế nào để cho list image_id vào trong 1 mảng rồi cho vào input hidden--}}
+            Dropzone.options.myDropzone= {
+                url: '{{ url('admincp/uploadImg') }}',
+                headers: {
+                    'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                },
+                autoProcessQueue: true,
+                uploadMultiple: true,
+                parallelUploads: 5,
+                maxFiles: 10,
+                maxFilesize: 5,
+                acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                dictFileTooBig: 'Image is bigger than 5MB',
+                addRemoveLinks: true,
+                removedfile: function(file) {
+                    var name = file.name;
+                    name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url('admincp/deleteImg') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': '{!! csrf_token() !!}'
+                        },
+                        data: "id="+name,
+                        dataType: 'html',
+                        success: function(data) {
+                            $("#msg").html(data);
+                        }
+                    });
+                    var _ref;
+                    if (file.previewElement) {
+                        if ((_ref = file.previewElement) != null) {
+                            _ref.parentNode.removeChild(file.previewElement);
+                        }
                     }
-                });
-                var _ref;
-                if (file.previewElement) {
-                    if ((_ref = file.previewElement) != null) {
-                        _ref.parentNode.removeChild(file.previewElement);
-                    }
-                }
-                return this._updateMaxFilesReachedClass();
-            },
-            success: function(file, response){
-                console.log(response)
-                $('#image_id').val(response.image_id)
-            },
-            previewsContainer: null,
-            hiddenInputContainer: "body",
-        }
+                    return this._updateMaxFilesReachedClass();
+                },
+                success: function(file, response){
+                    var arrId = imgId.push(response.image_id);
+                    console.log(arrId)
+                    $('#image_id').val(arrId)
+                },
+                previewsContainer: null,
+                hiddenInputContainer: "body",
+            }
     </script>
     <style>
         .dropzone {
