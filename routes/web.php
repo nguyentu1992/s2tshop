@@ -23,12 +23,19 @@ Route::get('/news', function () {
 Route::get('/contact', function () {
     return view('layouts.contact');
 });
+// cart shop
+Route::get('/cart', function () {
+    return view('layouts.cart');
+});
+Route::post('/cart', 'Front@cart');
+
 Auth::routes();
 
 Route::get('admincp/login', ['as' => 'getLogin', 'uses' => 'Admin\AdminLoginController@getLogin']);
 Route::post('admincp/login', ['as' => 'postLogin', 'uses' => 'Admin\AdminLoginController@postLogin']);
 Route::get('admincp/register', ['as' => 'postRegister', 'uses' => 'Admin\AdminLoginController@getRegister']);
 Route::get('admincp/logout', ['as' => 'getLogout', 'uses' => 'Admin\AdminLoginController@getLogout']);
+
 
 Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespace' => 'Admin'], function() {
     Route::get('/', function() {
@@ -38,5 +45,8 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespa
     Route::resource('product', 'AdminProductController');
     Route::post('uploadImg', 'UploadImagesController@postImages');
 });
+
+
+
 
 
