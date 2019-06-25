@@ -11,23 +11,33 @@
 |
 */
 
-Route::get('/product', function () {
+Route::get('/', function () {
     return view('layouts.home');
 });
-Route::get('/product', function () {
-    return view('layouts.product');
-});
-Route::get('/news', function () {
-    return view('layouts.news');
-});
-Route::get('/contact', function () {
-    return view('layouts.contact');
-});
-// cart shop
-Route::get('/cart', function () {
-    return view('layouts.cart');
-});
-Route::post('/cart', 'Front@cart');
+//Route::get('/product', function () {
+//    return view('layouts.product');
+//});
+//Route::get('/news', function () {
+//    return view('layouts.news');
+//});
+//Route::get('/contact', function () {
+//    return view('layouts.contact');
+//});
+//// cart shop
+//Route::get('/cart', function () {
+//    return view('layouts.cart');
+//});
+Route::get('product', 'ProductController@index');
+Route::get('product/{category_id}', 'ProductController@getList');
+//Route::get('product/{lastName}/{firstName}', 'ProductController@show');
+Route::post('product', 'ProductController@processForm');
+
+Route::get('category', 'CategoryController@index');
+Route::get('category/{lastName}', 'CategoryController@show');
+Route::get('category/{lastName}/{firstName}', 'CategoryController@show');
+Route::post('category', 'CategoryController@processForm');
+
+Route::post('/cart', 'CartController@cart');
 
 Auth::routes();
 

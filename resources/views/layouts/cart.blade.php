@@ -2,49 +2,140 @@
 @section('title', 'Cart')
  
 @section('content')
- 
-    <table id="cart" class="table table-hover table-condensed">
-        <thead>
-        <tr>
-            <th style="width:50%">Product</th>
-            <th style="width:10%">Price</th>
-            <th style="width:8%">Quantity</th>
-            <th style="width:22%" class="text-center">Subtotal</th>
-            <th style="width:10%"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td data-th="Product">
-                <div class="row">
-                    <div class="col-sm-3 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
-                    <div class="col-sm-9">
-                        <h4 class="nomargin">Product 1</h4>
-                        <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                @if(count($cart))
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($cart as $item)
+                            <tr>
+                                <td class="cart_product">
+                                    <a href=""><img src="images/cart/one.png" alt=""></a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="">{{$item->name}}</a></h4>
+                                    <p>Web ID: {{$item->id}}</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>${{$item->price}}</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <a class="cart_quantity_up" href="{{url("cart?product_id=$item->id&increment=1")}}"> + </a>
+                                        <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
+                                        <a class="cart_quantity_down" href=""> - </a>
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">${{$item->subtotal}}</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href="{{url("cart?product_id=$item->id&decrease=1")}}"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else
+                            <p>You have no items in the shopping cart</p>
+                        @endif
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>What would you like to do next?</h3>
+                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="chose_area">
+                        <ul class="user_option">
+                            <li>
+                                <input type="checkbox">
+                                <label>Use Coupon Code</label>
+                            </li>
+                            <li>
+                                <input type="checkbox">
+                                <label>Use Gift Voucher</label>
+                            </li>
+                            <li>
+                                <input type="checkbox">
+                                <label>Estimate Shipping & Taxes</label>
+                            </li>
+                        </ul>
+                        <ul class="user_info">
+                            <li class="single_field">
+                                <label>Country:</label>
+                                <select>
+                                    <option>United States</option>
+                                    <option>Bangladesh</option>
+                                    <option>UK</option>
+                                    <option>India</option>
+                                    <option>Pakistan</option>
+                                    <option>Ucrane</option>
+                                    <option>Canada</option>
+                                    <option>Dubai</option>
+                                </select>
+
+                            </li>
+                            <li class="single_field">
+                                <label>Region / State:</label>
+                                <select>
+                                    <option>Select</option>
+                                    <option>Dhaka</option>
+                                    <option>London</option>
+                                    <option>Dillih</option>
+                                    <option>Lahore</option>
+                                    <option>Alaska</option>
+                                    <option>Canada</option>
+                                    <option>Dubai</option>
+                                </select>
+
+                            </li>
+                            <li class="single_field zip-field">
+                                <label>Zip Code:</label>
+                                <input type="text">
+                            </li>
+                        </ul>
+                        <a class="btn btn-default update" href="">Get Quotes</a>
+                        <a class="btn btn-default check_out" href="">Continue</a>
                     </div>
                 </div>
-            </td>
-            <td data-th="Price">$1.99</td>
-            <td data-th="Quantity">
-                <input type="number" class="form-control text-center" value="1">
-            </td>
-            <td data-th="Subtotal" class="text-center">1.99</td>
-            <td class="actions" data-th="">
-                <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-                <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr class="visible-xs">
-            <td class="text-center"><strong>Total 1.99</strong></td>
-        </tr>
-        <tr>
-            <td><a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-            <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-        </tr>
-        </tfoot>
-    </table>
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Cart Sub Total <span>$59</span></li>
+                            <li>Eco Tax <span>$2</span></li>
+                            <li>Shipping Cost <span>Free</span></li>
+                            <li>Total <span>${{Cart::total()}}</span></li>
+                        </ul>
+                        <a class="btn btn-default update" href="{{url('clear-cart')}}">Clear Cart</a>
+                        <a class="btn btn-default check_out" href="{{url('checkout')}}">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#do_action-->
  
 @endsection

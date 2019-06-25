@@ -2,61 +2,74 @@
 @section('title', 'Products')
  
 @section('content')
- 
-    <div class="container products">
- 
-        <div class="row">
- 
-            <div class="col-xs-18 col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/500x300" alt="">
-                    <div class="caption">
-                        <h4>Product name</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                        <p><strong>Price: </strong> 567.7$</p>
-                        <p class="btn-holder"><a href="#" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
-                    </div>
+
+    <section id="advertisement">
+        <div class="container">
+            <img src="{{asset('/layouts/images/shop/advertisement.jpg')}}" alt="" />
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            @if(isset($listProduct) && count($listProduct) > 0)
+            <div class="row">
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Features Items</h2>
+                        @foreach ($listProduct as $product)
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <img src="{{asset('/layouts/images/shop/product9.jpg')}}" alt="" />
+                                            <h2>${{$product->price}}</h2>
+                                            <p>{{$product->name}}</p>
+                                            <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                            <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+                                                <h2>${{$product->price}}</h2>
+                                                <p>${{$product->name}}</p>
+                                                <form method="POST" action="{{url('cart')}}">
+                                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn btn-fefault add-to-cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        Add to cart
+                                                    </button>
+                                                </form>
+                                                <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div><!--features_items-->
                 </div>
+
+
             </div>
- 
-            <div class="col-xs-18 col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/500x300" alt="">
-                    <div class="caption">
-                        <h4>Product name</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                        <p><strong>Price: </strong> 567.7$</p>
-                        <p class="btn-holder"><a href="#" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
-                    </div>
-                </div>
+            <div class="row div-pagination padding-left">
+                <ul class="pagination">
+                    <li class="active"><a href="">1</a></li>
+                    <li><a href="">2</a></li>
+                    <li><a href="">3</a></li>
+                    <li><a href="">»</a></li>
+                </ul>
             </div>
- 
-            <div class="col-xs-18 col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/500x300" alt="">
-                    <div class="caption">
-                        <h4>Product name</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                        <p><strong>Price: </strong> 567.7$</p>
-                        <p class="btn-holder"><a href="#" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
-                    </div>
-                </div>
-            </div>
- 
-            <div class="col-xs-18 col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/500x300" alt="">
-                    <div class="caption">
-                        <h4>Product name</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                        <p><strong>Price: </strong> 567.7$</p>
-                        <p class="btn-holder"><a href="#" class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
-                    </div>
-                </div>
-            </div>
- 
-        </div><!-- End row -->
- 
-    </div>
+            @else
+                <h1>Không có data</h1>
+            @endif
+        </div>
+    </section>
  
 @endsection
