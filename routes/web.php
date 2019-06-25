@@ -27,10 +27,11 @@ Route::get('/', function () {
 //Route::get('/cart', function () {
 //    return view('layouts.cart');
 //});
+
 Route::get('product', 'ProductController@index');
 Route::get('product/{category_id}', 'ProductController@getList');
+Route::get('product/detail/{product_id}', 'ProductController@getDetailProduct');
 //Route::get('product/{lastName}/{firstName}', 'ProductController@show');
-Route::post('product', 'ProductController@processForm');
 
 Route::get('category', 'CategoryController@index');
 Route::get('category/{lastName}', 'CategoryController@show');

@@ -39,7 +39,9 @@ class ProductController extends Controller
     public function getList(Request $request)
     {
         $type = $request->category_id;
-        $this->data['listProduct'] = $this->productService->getListWithType($type);
+        if($type){
+            $this->data['listProduct'] = $this->productService->getListWithType($type);
+        }
         return view('layouts.product', $this->data);
     }
 
@@ -84,9 +86,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getDetailProduct(Request $request)
     {
-        //
+
     }
 
     /**

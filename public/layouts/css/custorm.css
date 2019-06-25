@@ -1,0 +1,15 @@
+.single-products:hover .productinfo h2 {
+    opacity: 0 !important;
+}
+.single-products:hover .productinfo a{
+    opacity: 0 !important;
+}
+.single-products:hover .productinfo p {
+    opacity: 0 !important;
+}
+
+.new, .sale {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

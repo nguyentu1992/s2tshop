@@ -28,6 +28,18 @@ class ProductRepository  extends BaseRepository
 
     /**
      * get list products
+     *
+     *
+     */
+    public function listProduct(){
+        return $this->makeModel()
+            ->where('count', '>' , 0)
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    /**
+     * get list products
      * @param $type
      *
      */
@@ -39,16 +51,6 @@ class ProductRepository  extends BaseRepository
             ->get();
     }
 
-    /**
-     * get list products
-     *
-     *
-     */
-    public function listProduct(){
-        return $this->makeModel()
-            ->where('count', '>' , 0)
-            ->orderBy('created_at', 'desc')
-            ->get();
-    }
+
 
 }
