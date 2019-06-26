@@ -53,8 +53,18 @@ class ProductService extends BaseService
      *
      *@param ProductRepository $productRepository
      */
-    public function getListWithType($type){
-        $listProduct = $this->productRepository->listProductWithType($type);
+    public function getListWithCategory($category_id){
+        $listProduct = $this->productRepository->listProductWithCategory($category_id);
+        return $listProduct;
+    }
+
+    /**
+     * Get detail product
+     *
+     *@param ProductRepository $productRepository
+     */
+    public function getDetailProduct($product_id){
+        $listProduct = $this->productRepository->getDetailProduct($product_id);
         return $listProduct;
     }
 

@@ -28,4 +28,13 @@ class CategoryRepository extends BaseRepository
             ->where('id', $id)
             ->first();
     }
+
+    /**
+     *
+     *
+     */
+    public function listSitebar(){
+        return $this->makeModel()
+            ->get();
+    }
 }

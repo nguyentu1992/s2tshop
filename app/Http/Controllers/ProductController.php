@@ -15,7 +15,6 @@ class ProductController extends Controller
 
     public function __construct(ProductService $productService)
     {
-        $this->data = [];
         $this->productService = $productService;
     }
 
@@ -23,29 +22,47 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request
      */
-    public function index()
+    public function listProduct(Request $request)
     {
-        $this->data['listProduct'] = $this->productService->getList();
-        return view('layouts.product', $this->data);
+        try {
+            $category_id = $request->category_id;
+            if ($category_id) {
+                $listProduct = $this->productService->getListWithCategory($category_id);
+                return view('layouts.product.index', compact('listProduct'));
+            }
+            $listProduct = $this->productService->getList();
+            return view('layouts.product.index', compact('listProduct'));
+        }
+        catch (\Exception $exception) {
+            abort('404');
+            echo $exception->getMessage();
+        }
     }
 
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
-     * @param $type
      * @return \Illuminate\Http\Response
      */
-    public function getList(Request $request)
+    public function getDetailProduct(Request $request)
     {
-        $type = $request->category_id;
-        if($type){
-            $this->data['listProduct'] = $this->productService->getListWithType($type);
-        }
-        return view('layouts.product', $this->data);
+        $product_id = $request->product_id;
+        $detailProduct = $this->productService->getDetailProduct($product_id);
+        return view('layouts.product.product_detail',compact('detailProduct'));
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function saveCookieId()
+    {
+        die('111111111');
     }
 
-    /**
+        /**
      * add cart shop
      *
      * @return \Illuminate\Http\Response
@@ -80,16 +97,6 @@ class ProductController extends Controller
         return view('cart', array('cart' => $cart, 'title' => 'Welcome', 'description' => '', 'page' => 'home'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getDetailProduct(Request $request)
-    {
-
-    }
 
     /**
      * Store a newly created resource in storage.

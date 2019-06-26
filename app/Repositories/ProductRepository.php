@@ -35,21 +35,36 @@ class ProductRepository  extends BaseRepository
         return $this->makeModel()
             ->where('count', '>' , 0)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(10);
     }
 
     /**
      * get list products
-     * @param $type
+     * @param $category_id
      *
      */
-    public function listProductWithType($type){
+    public function listProductWithCategory($category_id){
         return $this->makeModel()
-            ->where('category_id', $type)
-            ->where('count', '>' , 0)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->select('products.*')
+            ->join('categories', 'products.category_id', '=' , 'categories.id')
+            ->where('categories.id', $category_id)
+            ->where('products.count', '>' , 0)
+            ->orderBy('products.created_at', 'desc')
+            ->paginate(18);
     }
+
+    /**
+     * get list products
+     * @param $category_id
+     *
+     */
+    public function getDetailProduct($product_id){
+        return $this->makeModel()
+            ->join('categories', 'categories.id', '=', 'products.category_id')
+            ->where('products.id', $product_id)
+            ->first();
+    }
+
 
 
 

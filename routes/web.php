@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.home');
-});
+Route::get('/', 'HomeController@index');
+
 //Route::get('/product', function () {
 //    return view('layouts.product');
 //});
@@ -28,15 +27,12 @@ Route::get('/', function () {
 //    return view('layouts.cart');
 //});
 
-Route::get('product', 'ProductController@index');
-Route::get('product/{category_id}', 'ProductController@getList');
+Route::get('product', 'ProductController@listProduct')->name('list_product');
 Route::get('product/detail/{product_id}', 'ProductController@getDetailProduct');
-//Route::get('product/{lastName}/{firstName}', 'ProductController@show');
+Route::post('save-cookie-id', 'ProductController@saveCookieId');
 
-Route::get('category', 'CategoryController@index');
-Route::get('category/{lastName}', 'CategoryController@show');
-Route::get('category/{lastName}/{firstName}', 'CategoryController@show');
-Route::post('category', 'CategoryController@processForm');
+//Route::get('category', 'CategoryController@index');
+//Route::get('category/{lastName}/{firstName}', 'CategoryController@show');
 
 Route::post('/cart', 'CartController@cart');
 

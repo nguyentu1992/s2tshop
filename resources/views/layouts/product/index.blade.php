@@ -25,7 +25,7 @@
                                             <h2>${{$product->price}}</h2>
                                             <p>{{$product->name}}</p>
                                             <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                            <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                            <a href='{{url("product/detail/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
@@ -40,7 +40,10 @@
 {{--                                                        Add to cart--}}
 {{--                                                    </button>--}}
 {{--                                                </form>--}}
-                                                <a href='{{url("products/details/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
+                                                <a href='#' class="btn btn-default add-to-cart view-detail" >
+                                                    <i class="fa fa-info"></i>View Details
+                                                    <input type="hidden" value="{{ $product->id }}">
+                                                </a>
                                             </div>
                                         </div>
                                         <img src="{{ asset('layouts/images/home/new.png') }}" class="new" alt="">
@@ -60,14 +63,15 @@
 
 
             </div>
-            <div class="row div-pagination padding-left">
-                <ul class="pagination">
-                    <li class="active"><a href="">1</a></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">»</a></li>
-                </ul>
-            </div>
+{{--            <div class="row div-pagination padding-left">--}}
+{{--                <ul class="pagination">--}}
+{{--                    <li class="active"><a href="/product/{!! $listProduct->currentPage() !!}">1</a></li>--}}
+{{--                    <li><a href="/product/{!! $listProduct->currentPage() + 1 !!}">2</a></li>--}}
+{{--                    <li><a href="/product/{!! $listProduct->currentPage() + 2 !!}">3</a></li>--}}
+{{--                    <li><a href="/product/{!! $listProduct->lastPage() !!}">»</a></li>--}}
+{{--                </ul>--}}
+{{--            </div>--}}
+                {{ $listProduct->links() }}
             @else
                 <h1>Không có data</h1>
             @endif
