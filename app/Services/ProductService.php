@@ -85,24 +85,6 @@ class ProductService extends BaseService
 
     public function getCookieProductRecommend(){
         if (!empty($_COOKIE['product'])) {
-            $productCookie = $_COOKIE['product'];
-
-            return $productCookie;
-        }
-        return array();
-    }
-
-    /**
-     * Save Cookie get data
-     *
-     * @param $productId of product.sid
-     *
-     * @return Array product
-     */
-    public function saveCookieProductInfo($productId)
-    {
-        if (!empty($_COOKIE['product'])) {
-            $cookie = setcookie("product[$productId]", $productId, -1, '/');
             $dataInfo = $_COOKIE['product'];
             if (count($dataInfo) > 30) {
                 $cookieRemove = array_shift($dataInfo);
@@ -130,6 +112,22 @@ class ProductService extends BaseService
             }
 
             return $productCookie;
+        }
+        return array();
+    }
+
+    /**
+     * Save Cookie get data
+     *
+     * @param $productId of product.sid
+     *
+     * @return Array product
+     */
+    public function saveCookieProductInfo($productId)
+    {
+        if (!empty($_COOKIE['product'])) {
+            $cookie = setcookie("product[$productId]", $productId, -1, '/');
+            $this->getCookieProductRecommend();
         } else {
             $cookie = setcookie("product[$productId]", $productId, -1, '/');
         }

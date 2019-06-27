@@ -35,6 +35,7 @@ Route::post('save-cookie-id', 'ProductController@saveCookieId');
 //Route::get('category/{lastName}/{firstName}', 'CategoryController@show');
 
 Route::post('/cart', 'CartController@cart');
+Route::get('/cart', 'CartController@index');
 
 Auth::routes();
 

@@ -12,7 +12,7 @@
                 </ol>
             </div>
             <div class="table-responsive cart_info">
-                @if(count($cart))
+                @if(isset($cart))
                     <table class="table table-condensed">
                         <thead>
                         <tr class="cart_menu">
@@ -39,9 +39,9 @@
                                 </td>
                                 <td class="cart_quantity">
                                     <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href="{{url("cart?product_id=$item->id&increment=1")}}"> + </a>
+                                        <a class="cart_quantity_up" href='{{url("cart?product_id=$item->id&increment=1")}}'> + </a>
                                         <input class="cart_quantity_input" type="text" name="quantity" value="{{$item->qty}}" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
+                                        <a class="cart_quantity_down" href='{{url("cart?product_id=$item->id&decrease=1")}}'> - </a>
                                     </div>
                                 </td>
                                 <td class="cart_total">
@@ -52,11 +52,11 @@
                                 </td>
                             </tr>
                         @endforeach
-                        @else
-                            <p>You have no items in the shopping cart</p>
-                        @endif
                         </tbody>
                     </table>
+                @else
+                    <p>You have no items in the shopping cart</p>
+                @endif
             </div>
         </div>
     </section> <!--/#cart_items-->

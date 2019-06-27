@@ -150,8 +150,8 @@
                                     <div class="single-products">
                                         <div class="productinfo text-center">
                                             <img src="{{ asset('layouts/images/home/recommend1.jpg') }}" alt="" />
-                                            <h2>$56</h2>
-                                            <p>Easy Polo Black Edition</p>
+                                            <h2>{{ $listCookieProduct->price }} VND</h2>
+                                            <p>{{ $listCookieProduct->name }}</p>
                                             <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                         </div>
                                     </div>
