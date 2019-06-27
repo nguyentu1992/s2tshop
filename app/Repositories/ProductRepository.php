@@ -56,7 +56,7 @@ class ProductRepository  extends BaseRepository
         return $this->makeModel()
             ->where('count', '>' , 0)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(18);
     }
 
     /**
@@ -111,7 +111,7 @@ class ProductRepository  extends BaseRepository
      *
      * @return Array Score
      */
-    public function checkCookieScore($dataProduct)
+    public function checkCookieProduct($dataProduct)
     {
         $now = Carbon::now();
         return $this->makeModel()

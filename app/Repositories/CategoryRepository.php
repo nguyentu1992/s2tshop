@@ -33,8 +33,9 @@ class CategoryRepository extends BaseRepository
      *
      *
      */
-    public function listSitebar(){
+    public function getList(){
         return $this->makeModel()
+            ->where('status', 1)
             ->get();
     }
 

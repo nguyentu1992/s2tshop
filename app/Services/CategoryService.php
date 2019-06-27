@@ -32,8 +32,8 @@ class CategoryService
      *
      */
 
-    public function getSitebar(){
-        $listProduct = $this->categoryRepository->listSitebar();
+    public function getList(){
+        $listProduct = $this->categoryRepository->getList();
         return $listProduct;
     }
 

@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ProductService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    protected $productService;
+    protected $categoryService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ProductService $productService, CategoryService $categoryService)
     {
-        $this->middleware('auth');
+        $this->productService = $productService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -23,6 +30,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.home');
+        try {
+            $listProducts = $this->productService->getList();
+            $listCategorys = $this->categoryService->getList();
+            $listCookieProducts = $this->productService->getCookieProductRecommend();
+            return view('layouts.home', [
+                'listProducts' => $listProducts,
+                'listCategorys' => $listCategorys,
+                'listCookieProducts' => $listCookieProducts
+            ]);
+        }
+        catch (\Exception $exception) {
+            abort('404');
+            echo $exception->getMessage();
+        }
     }
 }

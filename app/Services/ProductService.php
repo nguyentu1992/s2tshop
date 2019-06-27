@@ -83,22 +83,31 @@ class ProductService extends BaseService
         return $product;
     }
 
+    public function getCookieProductRecommend(){
+        if (!empty($_COOKIE['product'])) {
+            $productCookie = $_COOKIE['product'];
+
+            return $productCookie;
+        }
+        return array();
+    }
+
     /**
      * Save Cookie get data
      *
-     * @param $scoreId of SCORE.sid
+     * @param $productId of product.sid
      *
-     * @return Array Score
+     * @return Array product
      */
     public function saveCookieProductInfo($productId)
     {
-        if (!empty($_COOKIE['score'])) {
-            $cookie = setcookie("score[$productId]", $productId, -1, '/');
-            $dataInfo = $_COOKIE['score'];
+        if (!empty($_COOKIE['product'])) {
+            $cookie = setcookie("product[$productId]", $productId, -1, '/');
+            $dataInfo = $_COOKIE['product'];
             if (count($dataInfo) > 30) {
                 $cookieRemove = array_shift($dataInfo);
-                unset($_COOKIE["score[$cookieRemove]"]);
-                setcookie("score[$cookieRemove]", null, -1, '/');
+                unset($_COOKIE["product[$cookieRemove]"]);
+                setcookie("product[$cookieRemove]", null, -1, '/');
             }
 
             if (Agent::isMobile() AND !Agent::isTablet()) {
@@ -111,18 +120,18 @@ class ProductService extends BaseService
                 }
             }
             $limit = (Agent::isMobile() AND !Agent::isTablet()) ? STORE_LIMIT_MOBILE : STORE_LIMIT;
-            $scoreCookie = $this->productRepository->getCookieProduct($dataInfo, $limit);
+            $productCookie = $this->productRepository->getCookieProduct($dataInfo, $limit);
             foreach ($dataInfo as $item) {
-                $checkCookie = $this->productRepository->checkCookieScore($item);
+                $checkCookie = $this->productRepository->checkCookieProduct($item);
                 if (empty($checkCookie)) {
-                    unset($_COOKIE["score[$item]"]);
-                    setcookie("score[$item]", null, -1, '/');
+                    unset($_COOKIE["product[$item]"]);
+                    setcookie("product[$item]", null, -1, '/');
                 }
             }
 
-            return $scoreCookie;
+            return $productCookie;
         } else {
-            $cookie = setcookie("score[$productId]", $productId, -1, '/');
+            $cookie = setcookie("product[$productId]", $productId, -1, '/');
         }
 
         return array();

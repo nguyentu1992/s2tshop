@@ -56,7 +56,7 @@
 									<input type="text" value="1" />
 									<button type="button" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
-										Add to cart
+										Thêm vào giỏ hàng
 									</button>
 								</span>
                                 <p><b>Tình trạng :</b> {{ $detailProduct->count > 0 ? 'Còn hàng' : 'Hết hàng' }}</p>
@@ -86,7 +86,7 @@
                                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
                                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
                                     </div>
@@ -126,7 +126,7 @@
                                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@
                                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
                                                 <h2>$56</h2>
                                                 <p>Easy Polo Black Edition</p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                             </div>
                                         </div>
                                     </div>
@@ -186,9 +186,9 @@
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
                                                     <img src="{{ asset('layouts/images/home/recommend1.jpg') }}" alt="" />
-                                                    <h2>$56</h2>
-                                                    <p>Easy Polo Black Edition</p>
-                                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                    <h2>{{ $productRecommend->price }} VND</h2>
+                                                    <p>{{ $productRecommend->name }}</p>
+                                                    <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                                 </div>
                                             </div>
                                         </div>
