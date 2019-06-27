@@ -3,6 +3,7 @@
 
 namespace App\Repositories;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 
 
 class ProductRepository  extends BaseRepository
@@ -10,6 +11,26 @@ class ProductRepository  extends BaseRepository
     public function model()
     {
         return "App\\Models\\Product";
+    }
+
+    /**
+     *
+     *
+     */
+    public function findByProductId($product_id){
+        return $this->makeModel()
+            ->find($product_id);
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function findByCategoryId($category_id){
+        return $this->makeModel()
+            ->where('category_id', $category_id)
+            ->get();
     }
 
     /**
@@ -65,7 +86,37 @@ class ProductRepository  extends BaseRepository
             ->first();
     }
 
+    /**
+     * Get list Product Score Info in Cookie
+     *
+     * @param array $dataProduct
+     * @param $limit
+     *
+     * @return Array Score
+     */
+    public function getCookieProduct($dataProduct, $limit)
+    {
+        $now = Carbon::now();
+        return $this->makeModel()
+            ->whereIn('id', $dataProduct)
+            ->limit($limit)
+            ->get();
 
+    }
 
+    /**
+     * Check cookie score in db
+     *
+     * @param array $dataProduct
+     *
+     * @return Array Score
+     */
+    public function checkCookieScore($dataProduct)
+    {
+        $now = Carbon::now();
+        return $this->makeModel()
+            ->where('id', $dataProduct)
+            ->first();
+    }
 
 }

@@ -40,7 +40,7 @@
 {{--                                                        Add to cart--}}
 {{--                                                    </button>--}}
 {{--                                                </form>--}}
-                                                <a href='#' class="btn btn-default add-to-cart view-detail" >
+                                                <a href='{{url("product/detail/$product->id")}}' class="btn btn-default add-to-cart view-detail" >
                                                     <i class="fa fa-info"></i>View Details
                                                     <input type="hidden" value="{{ $product->id }}">
                                                 </a>

@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+//Route::get('/', 'HomeController@index');
 
-//Route::get('/product', function () {
-//    return view('layouts.product');
-//});
+Route::get('/', function () {
+    return view('layouts.home');
+});
 //Route::get('/news', function () {
 //    return view('layouts.news');
 //});

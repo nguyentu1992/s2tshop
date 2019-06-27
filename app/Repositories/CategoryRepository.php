@@ -37,4 +37,24 @@ class CategoryRepository extends BaseRepository
         return $this->makeModel()
             ->get();
     }
+
+    /**
+     *
+     *
+     */
+    public function findByProductId($product_id){
+        return $this->makeModel()
+            ->find($product_id);
+    }
+
+    /**
+     *
+     *
+     * @param $category_id
+     */
+    public function getCategoryProduct($category_id){
+        return $this->makeModel()
+            ->where('id', $category_id)
+            ->get();
+    }
 }

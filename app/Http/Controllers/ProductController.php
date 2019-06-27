@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -12,10 +13,12 @@ class ProductController extends Controller
 {
     protected $data;
     protected $productService;
+    protected $categoryService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, CategoryService $categoryService)
     {
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -50,16 +53,24 @@ class ProductController extends Controller
     {
         $product_id = $request->product_id;
         $detailProduct = $this->productService->getDetailProduct($product_id);
-        return view('layouts.product.product_detail',compact('detailProduct'));
+        $productRecommends = $this->productService->saveCookieProductInfo($product_id);
+        $categoryId = $this->productService->findByProductId($product_id)->category_id;
+        $categoryProducts = $this->productService->findByCategoryId($categoryId);
+        return view('layouts.product.product_detail', [
+            'detailProduct' => $detailProduct,
+            'productRecommends' => $productRecommends,
+            'categoryProducts' => $categoryProducts
+        ]);
     }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
-     */
-    public function saveCookieId()
+    $categoryId
+    public function saveCookieId(Request $request)
     {
-        die('111111111');
+        $product_id = $request->product_id;
+
     }
 
         /**

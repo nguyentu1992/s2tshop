@@ -37,4 +37,11 @@ class CategoryService
         return $listProduct;
     }
 
+    /**
+     *
+     *
+     */
+    public function findByCategoryId($id){
+    }
+
 }
