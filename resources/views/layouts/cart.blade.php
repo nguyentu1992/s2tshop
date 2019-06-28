@@ -7,7 +7,7 @@
         <div class="container">
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="active">Shopping Cart</li>
                 </ol>
             </div>
@@ -55,7 +55,7 @@
                         </tbody>
                     </table>
                 @else
-                    <p>You have no items in the shopping cart</p>
+                    <p>Bạn chưa chọn món đồ nào, có nhiều hàng đẹp lắm, chọn tiếp nhé!</p>
                 @endif
             </div>
         </div>
@@ -64,8 +64,8 @@
     <section id="do_action">
         <div class="container">
             <div class="heading">
-                <h3>What would you like to do next?</h3>
-                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+                <h3>Xin mời bạn chọn tiếp!</h3>
+                <p>Chọn nếu bạn có mã giảm giá hoặc điểm thưởng bạn muốn sử dụng hoặc muốn ước tính chi phí giao hàng của bạn.</p>
             </div>
             <div class="row">
                 <div class="col-sm-6">
@@ -73,15 +73,15 @@
                         <ul class="user_option">
                             <li>
                                 <input type="checkbox">
-                                <label>Use Coupon Code</label>
+                                <label>Sử dụng coupon code</label>
                             </li>
                             <li>
                                 <input type="checkbox">
-                                <label>Use Gift Voucher</label>
+                                <label>Sử dụng voucher</label>
                             </li>
                             <li>
                                 <input type="checkbox">
-                                <label>Estimate Shipping & Taxes</label>
+                                <label>Thuế giá trị gia tăng</label>
                             </li>
                         </ul>
                         <ul class="user_info">
@@ -125,10 +125,10 @@
                 <div class="col-sm-6">
                     <div class="total_area">
                         <ul>
-                            <li>Cart Sub Total <span>$59</span></li>
-                            <li>Eco Tax <span>$2</span></li>
-                            <li>Shipping Cost <span>Free</span></li>
-                            <li>Total <span>${{Cart::total()}}</span></li>
+                            <li>Cart Sub Total <span>{{ Cart::subtotal() }} VND</span></li>
+                            <li>Thuế giá trị gia tăng <span>0$</span></li>
+                            <li>Phí ship <span>Miễn phí</span></li>
+                            <li>Tổng tiền: <span>{{Cart::total()}} VND</span></li>
                         </ul>
                         <a class="btn btn-default update" href="{{url('clear-cart')}}">Clear Cart</a>
                         <a class="btn btn-default check_out" href="{{url('checkout')}}">Check Out</a>

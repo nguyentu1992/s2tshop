@@ -74,4 +74,13 @@ class CartController extends Controller
         $cart = Cart::content();
         return view('layouts.cart', compact('cart'));
     }
+
+    /**
+     *
+     * clear Cart
+     */
+    public function clearCart(){
+        Cart::destroy();
+        return view('layouts.cart');
+    }
 }

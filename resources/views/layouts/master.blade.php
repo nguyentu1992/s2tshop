@@ -15,69 +15,56 @@
     <link href="{{ asset('layouts/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('layouts/css/custorm.css') }}" rel="stylesheet">
     <link href="{{ asset('layouts/css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="{{ asset('layouts/images/ico/favicon.ico') }}">
 </head><!--/head-->
+<div class="fb-livechat">
+    <div class="ctrlq fb-overlay"></div>
+    <div class="fb-widget">
+        <div class="ctrlq fb-close"></div>
+        <div class="fb-page" data-href="https://www.facebook.com/S2TBoutiques" data-tabs="messages" data-width="360"
+             data-height="400" data-small-header="true" data-hide-cover="true" data-show-facepile="false"></div>
+        <div class="fb-credit"><a href="https://thanhtrungmobile.vn" target="_blank">Powered by TT</a></div>
+        <div id="fb-root"></div>
+    </div>
+    <a href="https://m.me/S2TBoutiques" title="Gửi tin nhắn cho chúng tôi qua Facebook" class="ctrlq fb-button">
+        <div class="bubble">1</div>
+        <div class="bubble-msg">Bạn cần hỗ trợ?</div>
+    </a></div>
+<script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>jQuery(document).ready(function ($) {
+        function detectmob() {
+            if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 
+        var t = {delay: 125, overlay: $(".fb-overlay"), widget: $(".fb-widget"), button: $(".fb-button")};
+        setTimeout(function () {
+            $("div.fb-livechat").fadeIn()
+        }, 8 * t.delay);
+        if (!detectmob()) {
+            $(".ctrlq").on("click", function (e) {
+                e.preventDefault(), t.overlay.is(":visible") ? (t.overlay.fadeOut(t.delay), t.widget.stop().animate({
+                    bottom: 0,
+                    opacity: 0
+                }, 2 * t.delay, function () {
+                    $(this).hide("slow"), t.button.show()
+                })) : t.button.fadeOut("medium", function () {
+                    t.widget.stop().show().animate({bottom: "30px", opacity: 1}, 2 * t.delay), t.overlay.fadeIn(t.delay)
+                })
+            })
+        }
+    });
+</script>
 <body>
 <!--/header-->
 @include("layouts.elements.top")
 <!--/slider-->
 @include("layouts.elements.slide")
-{{--<section>--}}
-{{--    <div class="container">--}}
-{{--        <div class="row">--}}
-{{--            <div class="col-lg-12 col-sm-12 col-12 main-section">--}}
-{{--                <div class="dropdown">--}}
-{{--                    <button type="button" class="btn btn-info" data-toggle="dropdown">--}}
-{{--                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">3</span>--}}
-{{--                    </button>--}}
-{{--                    <div class="dropdown-menu">--}}
-{{--                        <div class="row total-header-section">--}}
-{{--                            <div class="col-lg-6 col-sm-6 col-6">--}}
-{{--                                <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">3</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-6 col-sm-6 col-6 total-section text-right">--}}
-{{--                                <p>Total: <span class="text-info">$2,978.24</span></p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row cart-detail">--}}
-{{--                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">--}}
-{{--                                <img src="https://images-na.ssl-images-amazon.com/images/I/811OyrCd5hL._SX425_.jpg">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">--}}
-{{--                                <p>Sony DSC-RX100M..</p>--}}
-{{--                                <span class="price text-info"> $250.22</span> <span class="count"> Quantity:01</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row cart-detail">--}}
-{{--                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">--}}
-{{--                                <img src="https://cdn2.gsmarena.com/vv/pics/blu/blu-vivo-48-1.jpg">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">--}}
-{{--                                <p>Vivo DSC-RX100M..</p>--}}
-{{--                                <span class="price text-info"> $500.40</span> <span class="count"> Quantity:01</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row cart-detail">--}}
-{{--                            <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">--}}
-{{--                                <img src="https://static.toiimg.com/thumb/msid-55980052,width-640,resizemode-4/55980052.jpg">--}}
-{{--                            </div>--}}
-{{--                            <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">--}}
-{{--                                <p>Lenovo DSC-RX100M..</p>--}}
-{{--                                <span class="price text-info"> $445.78</span> <span class="count"> Quantity:01</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="row">--}}
-{{--                            <div class="col-lg-12 col-sm-12 col-12 text-center checkout">--}}
-{{--                                <a href="{{ url('cart') }}" class="btn btn-primary btn-block">View all</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</section>--}}
 <section>
     <div class="container">
         <div class="row">
@@ -90,7 +77,23 @@
         </div>
     </div>
 </section>
+<div class="fix_tel">
+    <div class="ring-alo-phone ring-alo-green ring-alo-show" id="ring-alo-phoneIcon"
+         style="bottom: -12px;">
+        <div class="ring-alo-ph-circle"></div>
+        <div class="ring-alo-ph-circle-fill"></div>
+        <div class="ring-alo-ph-img-circle">
+
+            <a href="tel:0335532692"><img class="lazy" src="https://khomaythegioi.com/icon/goi.png" alt="G"></a>
+
+        </div>
+    </div>
+    <div class="tel">
+        <a href="tel:0335532692"></a>
+    </div>
+</div>
 @include("layouts.elements.footer")
+
 <!--/Footer-->
 <script src="{{ asset('layouts/js/jquery.js') }}"></script>
 <script src="{{ asset('layouts/js/bootstrap.min.js') }}"></script>
@@ -100,4 +103,5 @@
 <script src="{{ asset('layouts/js/main.js') }}"></script>
 <script src="{{ asset('layouts/js/category.js') }}"></script>
 </body>
+
 </html>

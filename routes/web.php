@@ -13,23 +13,10 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//Route::get('/', function () {
-//    return view('layouts.home');
-//});
-//Route::get('/news', function () {
-//    return view('layouts.news');
-//});
-//Route::get('/contact', function () {
-//    return view('layouts.contact');
-//});
-//// cart shop
-//Route::get('/cart', function () {
-//    return view('layouts.cart');
-//});
-
 Route::get('product', 'ProductController@listProduct')->name('list_product');
 Route::get('product/detail/{product_id}', 'ProductController@getDetailProduct');
-Route::post('save-cookie-id', 'ProductController@saveCookieId');
+Route::get('clear-cart', 'CartController@clearCart');
+Route::get('checkout', 'CartController@checkOut');
 
 Route::match(['get', 'post'], '/cart', 'CartController@cart')->name('cart');
 

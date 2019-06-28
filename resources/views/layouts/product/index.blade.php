@@ -22,7 +22,7 @@
                                     <div class="single-products">
                                         <div class="productinfo text-center">
                                             <img src="{{asset('/layouts/images/shop/product9.jpg')}}" alt="" />
-                                            <h2>{{$product->price}}</h2>
+                                            <h2>{{$product->price}}</h2>0
                                             <p>{{$product->name}}</p>
                                             <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                             <a href='{{url("product/detail/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
@@ -32,14 +32,6 @@
                                                 <h2>{{$product->price}}</h2>
                                                 <p>{{$product->name}}</p>
                                                 <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-{{--                                                <form method="POST" action="{{url('cart')}}">--}}
-{{--                                                    <input type="hidden" name="product_id" value="{{$product->id}}">--}}
-{{--                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-{{--                                                    <button type="submit" class="btn btn-fefault add-to-cart">--}}
-{{--                                                        <i class="fa fa-shopping-cart"></i>--}}
-{{--                                                        Thêm vào giỏ hàng--}}
-{{--                                                    </button>--}}
-{{--                                                </form>--}}
                                                 <a href='{{url("product/detail/$product->id")}}' class="btn btn-default add-to-cart view-detail" >
                                                     <i class="fa fa-info"></i>View Details
                                                     <input type="hidden" value="{{ $product->id }}">
