@@ -24,14 +24,14 @@
                                             <img src="{{asset('/layouts/images/shop/product9.jpg')}}" alt="" />
                                             <h2>{{$product->price}}</h2>
                                             <p>{{$product->name}}</p>
-                                            <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                            <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                             <a href='{{url("product/detail/$product->id")}}' class="btn btn-default add-to-cart"><i class="fa fa-info"></i>View Details</a>
                                         </div>
                                         <div class="product-overlay">
                                             <div class="overlay-content">
                                                 <h2>{{$product->price}}</h2>
                                                 <p>{{$product->name}}</p>
-                                                <a href="{{url('cart')}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                                <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
 {{--                                                <form method="POST" action="{{url('cart')}}">--}}
 {{--                                                    <input type="hidden" name="product_id" value="{{$product->id}}">--}}
 {{--                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">--}}

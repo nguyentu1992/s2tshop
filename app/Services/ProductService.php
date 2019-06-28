@@ -43,6 +43,8 @@ class ProductService extends BaseService
         return $listProduct;
     }
 
+
+
     /**
      * Get List with type
      *

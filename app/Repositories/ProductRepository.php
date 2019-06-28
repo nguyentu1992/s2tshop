@@ -59,6 +59,8 @@ class ProductRepository  extends BaseRepository
             ->paginate(18);
     }
 
+
+
     /**
      * get list products
      * @param $category_id
@@ -81,7 +83,6 @@ class ProductRepository  extends BaseRepository
      */
     public function getDetailProduct($product_id){
         return $this->makeModel()
-            ->join('categories', 'categories.id', '=', 'products.category_id')
             ->where('products.id', $product_id)
             ->first();
     }

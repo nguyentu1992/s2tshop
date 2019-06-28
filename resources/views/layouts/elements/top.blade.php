@@ -62,7 +62,7 @@
                             <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-pill badge-danger">3</span></a>
+                            <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-pill badge-danger quantity-cart">{{ Cart::count() ?: 0  }}</span></a>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
@@ -85,24 +85,57 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                            <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                            <li class="dropdown"><a href="#">Áo<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
-                                    <li><a href="product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="/cart">Cart</a></li>
-                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="{{ route('list_product') }}">Sản phẩm hot</a></li>
+                                    <li><a href="#">Áo phông</a></li>
+                                    <li><a href="#">Áo sơ mi</a></li>
+                                    <li><a href="#">Áo thể thao</a></li>
+                                    <li><a href="#">Áo cộc</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Quần<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ route('list_product') }}">Sản phẩm hot</a></li>
+                                    <li><a href="#">Quần thể thao</a></li>
+                                    <li><a href="#">Quần bò</a></li>
+                                    <li><a href="#">Quần short</a></li>
+                                    <li><a href="#">Áo cộc</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Váy<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ route('list_product') }}">Sản phẩm hot</a></li>
+                                    <li><a href="#">Váy baby doll</a></li>
+                                    <li><a href="#">Váy</a></li>
+                                    <li><a href="#">Váy</a></li>
+                                    <li><a href="#">Váy</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Phụ kiện<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ route('list_product') }}">Sản phẩm hot</a></li>
+                                    <li><a href="#">Balo</a></li>
+                                    <li><a href="#">Thắt lưng da</a></li>
+                                    <li><a href="#">Mũ nón</a></li>
+                                    <li><a href="#">Ví da</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown"><a href="#">Khuyến mãi<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="{{ route('list_product') }}">Sản phẩm mới</a></li>
+                                    <li><a href="#">50%</a></li>
+                                    <li><a href="#">50%</a></li>
+                                    <li><a href="#">50%</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                    <li><a href="#">Blog của tôi</a></li>
                                 </ul>
                             </li>
-                            <li><a href="404.html">404</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>

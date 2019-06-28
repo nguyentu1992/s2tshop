@@ -43,6 +43,21 @@ class CategoryRepository extends BaseRepository
      *
      *
      */
+    public function listCateTab(){
+        return $this->makeModel()
+            ->select('categories.*', 'products.*')
+            ->join('products', 'categories.id', '=','products.category_id')
+            ->where('categories.cate_tab', 1)
+            ->where('products.count', '>' , 0)
+            ->orderBy('products.created_at', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
+    /**
+     *
+     *
+     */
     public function findByProductId($product_id){
         return $this->makeModel()
             ->find($product_id);

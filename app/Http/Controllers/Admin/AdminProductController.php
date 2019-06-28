@@ -65,7 +65,6 @@ class AdminProductController extends Controller
             return Redirect::to('admincp/product/create')
                 ->withErrors($validator);
         } else {
-            dd($request->get('image_id'));
             $product = new Product;
             $product->name = Input::get('txtName');
             $product->content = Input::get('txtContent');

@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 
 class CategoryService
 {
@@ -33,8 +34,20 @@ class CategoryService
      */
 
     public function getList(){
-        $listProduct = $this->categoryRepository->getList();
-        return $listProduct;
+        $listCategory = $this->categoryRepository->getList();
+        return $listCategory;
+    }
+
+    /**
+     *
+     * Get List
+     *
+     * @param ProductRepository $productRepository
+     */
+
+    public function getListCateTab(){
+        $listCategory = $this->categoryRepository->listCateTab();
+        return $listCategory;
     }
 
     /**

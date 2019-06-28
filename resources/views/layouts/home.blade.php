@@ -11,13 +11,27 @@
                         <img src="{{ asset('layouts/images/home/product1.jpg') }}" alt="" />
                         <h2>{{ $listProduct->price }} VND</h2>
                         <p>{{ $listProduct->desc }}</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                        <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                            Thêm vào giỏ hàng
+                            <input type="hidden" value="{{ $listProduct->id }}">
+                        </a>
+                        <a href='{{url("product/detail/$listProduct->id")}}' class="btn btn-default add-to-cart view-detail" >
+                            <i class="fa fa-info"></i>View Details
+                            <input type="hidden" value="{{ $listProduct->id }}">
+                        </a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>{{ $listProduct->price }} VND</h2>
                             <p>{{ $listProduct->desc }}</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                            <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+                                Thêm vào giỏ hàng
+                                <input type="hidden" value="{{ $listProduct->id }}">
+                            </a>
+                            <a href='{{url("product/detail/$listProduct->id")}}' class="btn btn-default add-to-cart view-detail" >
+                                <i class="fa fa-info"></i>View Details
+                                <input type="hidden" value="{{ $listProduct->id }}">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -36,110 +50,41 @@
     <div class="category-tab"><!--category-tab-->
         <div class="col-sm-12">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#sportwear" data-toggle="tab">Bộ thể thao</a></li>
-                <li><a href="#tshirt" data-toggle="tab">Áo phông thụng</a></li>
-                <li><a href="#lacoste" data-toggle="tab">Quần bò</a></li>
-                <li><a href="#balo" data-toggle="tab">Balo</a></li>
-                <li><a href="#handbag" data-toggle="tab">Túi xách</a></li>
+                @if($listCategoryTabs)
+                    @foreach($listCategoryTabs as $k => $listCategoryTab)
+                        <li class="{{$k == 0 ? 'active' : ''}}"><a href="#catetab-{{$k}}" data-toggle="tab">{{ $listCategoryTab->name }}</a></li>
+                    @endforeach
+                @endif
             </ul>
         </div>
         <div class="tab-content">
-            <div class="tab-pane fade active in" id="sportwear" >
-                @for($i = 0; $i < 4; $i++)
+            @if($listCategoryTabs)
+            @foreach($listCategoryTabs as $k => $listCategoryTab)
+            <div class="tab-pane fade active in" id="#catetab-{{$k}}" >
                 <div class="col-sm-3">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                <h2>{{ $listCategoryTab->price }} VND</h2>
+                                <p>{{ $listCategoryTab->name }}</p>
+                                <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                <a href='{{url("product/detail/$listCategoryTab->id")}}' class="btn btn-default add-to-cart view-detail" >
+                                    <i class="fa fa-info"></i>View Details
+                                    <input type="hidden" value="{{ $listCategoryTab->id }}">
+                                </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
-                @endfor
             </div>
-
-            <div class="tab-pane fade" id="tshirt" >
-                @for($i = 0; $i < 4; $i++)
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                @endfor
-            </div>
-
-            <div class="tab-pane fade" id="lacoste" >
-                @for($i = 0; $i < 4; $i++)
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                @endfor
-
-            </div>
-
-            <div class="tab-pane fade" id="balo" >
-                @for($i = 0; $i < 4; $i++)
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                @endfor
-            </div>
-
-            <div class="tab-pane fade" id="handbag" >
-                @for($i = 0; $i < 4; $i++)
-                <div class="col-sm-3">
-                    <div class="product-image-wrapper">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{ asset('layouts/images/home/gallery1.jpg') }}" alt="" />
-                                <h2>$56</h2>
-                                <p>Easy Polo Black Edition</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                @endfor
-            </div>
+            @endforeach
+            @endif
         </div>
     </div><!--/category-tab-->
 
     <div class="recommended_items"><!--recommended_items-->
         <h2 class="title text-center">Sản phẩm đã xem</h2>
-
         @if($listCookieProducts)
             <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -152,7 +97,11 @@
                                             <img src="{{ asset('layouts/images/home/recommend1.jpg') }}" alt="" />
                                             <h2>{{ $listCookieProduct->price }} VND</h2>
                                             <p>{{ $listCookieProduct->name }}</p>
-                                            <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+                                            <a href="javascript: return false;" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                            <a href='{{url("product/detail/$listCookieProduct->id")}}' class="btn btn-default add-to-cart view-detail" >
+                                                <i class="fa fa-info"></i>View Details
+                                                <input type="hidden" value="{{ $listCookieProduct->id }}">
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

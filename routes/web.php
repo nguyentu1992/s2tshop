@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 //Route::get('/', function () {
 //    return view('layouts.home');
@@ -31,11 +31,7 @@ Route::get('product', 'ProductController@listProduct')->name('list_product');
 Route::get('product/detail/{product_id}', 'ProductController@getDetailProduct');
 Route::post('save-cookie-id', 'ProductController@saveCookieId');
 
-//Route::get('category', 'CategoryController@index');
-//Route::get('category/{lastName}/{firstName}', 'CategoryController@show');
-
-Route::post('/cart', 'CartController@cart');
-Route::get('/cart', 'CartController@index');
+Route::match(['get', 'post'], '/cart', 'CartController@cart')->name('cart');
 
 Auth::routes();
 
