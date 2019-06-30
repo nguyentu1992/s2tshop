@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -10,14 +11,17 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Services\UploadService;
 
 class AdminProductController extends Controller
 {
     protected $data;
+    private $uploadService;
 
-    public function __construct()
+    public function __construct(UploadService $uploadService)
     {
         $this->data = [];
+        $this->uploadService = $uploadService;
     }
 
     /**
@@ -40,8 +44,9 @@ class AdminProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->uploadService->deleteSessionImage($request);
         $this->data['title'] = 'Add new product';
         $listCate = DB::table('categories')->orderBy('id', 'desc')->get();
         $this->data['listCate'] = $listCate;
@@ -65,31 +70,27 @@ class AdminProductController extends Controller
             return Redirect::to('admincp/product/create')
                 ->withErrors($validator);
         } else {
-            $product = new Product;
-            $product->name = Input::get('txtName');
-            $product->content = Input::get('txtContent');
-            $product->desc = Input::get('txtDesc');
-            $product->price = Input::get('txtPrice');
-            $product->category_id = $request->get('cate_id');
-            $product->upload_id = $request->get('image_id');
-            $product->meta_title = Input::get('meta_title');
-            $product->meta_keywords = Input::get('meta_keywords');
-            $product->meta_description = Input::get('meta_description');
-            $product->save();
+            $product = Product::create([
+                'name' => Input::get('txtName'),
+                'content' => Input::get('txtContent'),
+                'desc' => Input::get('txtDesc'),
+                'price' => Input::get('txtPrice'),
+                'category_id' => $request->get('cate_id'),
+                'meta_title' => Input::get('meta_title'),
+                'meta_keywords' => Input::get('meta_keywords'),
+                'meta_description' => Input::get('meta_description')
+            ]);
+            $arrId = Input::get('image_id');
+            $arrId = explode(',', $arrId);
+            foreach($arrId as $id) {
+                $upload = $this->uploadService->findByUploadId($id);
+                $upload->product_id = $product->id;
+                $upload->save();
+            }
+            $this->uploadService->deleteSessionImage($request);
             Session::flash('message', "Successfully created product");
             return Redirect::to('admincp/product');
         }
-    }
-
-    /**
-     * Upload images.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postImages(Request $request)
-    {
-
     }
 
 }

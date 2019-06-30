@@ -133,8 +133,8 @@
                     return this._updateMaxFilesReachedClass();
                 },
                 success: function(file, response){
-                    var arrId = imgId.push(response.image_id);
-                    console.log(arrId)
+                    console.log(response.image_session)
+                    var arrId = response.image_session
                     $('#image_id').val(arrId)
                 },
                 previewsContainer: null,

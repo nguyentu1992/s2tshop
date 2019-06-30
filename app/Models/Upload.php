@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel as Model;
 
 class Upload extends Model
 {
     protected $table = 'uploads';
     protected $fillable = [
-        'filename', 'resized_name', 'original_name'
+        'filename', 'resized_name', 'original_name', 'product_id'
     ];
 }

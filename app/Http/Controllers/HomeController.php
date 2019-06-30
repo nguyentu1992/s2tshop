@@ -27,7 +27,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * 
      */
     public function index()
     {
@@ -44,7 +44,6 @@ class HomeController extends Controller
             ]);
         }
         catch (\Exception $exception) {
-            abort('404');
             echo $exception->getMessage();
         }
     }

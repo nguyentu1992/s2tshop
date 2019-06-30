@@ -7,15 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
+use App\Services\UploadService;
 
 class UploadImagesController extends Controller
 {
 
     private $photos_path;
+    private $uploadService;
 
-    public function __construct()
+    public function __construct(UploadService $uploadService)
     {
         $this->photos_path = public_path('/images');
+        $this->uploadService = $uploadService;
     }
 
     /**
@@ -63,20 +66,25 @@ class UploadImagesController extends Controller
                         'original_name' => basename($photo->getClientOriginalName())
                     ]);
                     $imageId = $upload->id;
-//                    $request->session()->push('image_id', $upload->id);
+                    // $request->session()->push('image_session', $imageId);
+                    $this->uploadService->saveSessionImage($request, $imageId);
                 }
-//                $imageId[] = $request->session()->get('image_id');
-//                return view('admin.product.create')->with([
-//                    'message' => 'Image saved Successfully',
-//                    'image_id' => $imageId
-//                ]);
                 return Response::json([
                     'message' => 'Image saved Successfully',
-                    'image_id' => $imageId
+                    'image_session' => $request->session()->get('image_session')
                 ], 200);
             }
         }
     }
+
+    /**
+     * 
+     * 
+     */
+    public function postDelete(Request $request){
+        dd($request->all());
+    }
+
 
     /**
      * Remove the images from the storage.

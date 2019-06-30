@@ -35,6 +35,7 @@ Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admincp', 'namespa
     Route::resource('category', 'AdminCategoryController');
     Route::resource('product', 'AdminProductController');
     Route::post('uploadImg', 'UploadImagesController@postImages');
+    Route::post('deleteImg', 'UploadImagesController@destroy');
 });
 
 
